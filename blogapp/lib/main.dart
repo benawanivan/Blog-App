@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'detail.dart';
 
 void main() {
   runApp(new MaterialApp(
@@ -57,7 +58,13 @@ class Post extends StatelessWidget {
       child: new Center(
         child: new Column(
           children: <Widget>[
-            new Cards(),
+            new Cards(
+                judul: "Ini Judul",
+                penulis: "Ivan Benawan",
+                tanggal: "19/12/2020",
+                gambar: "img/bromo.jpg",
+                isi:
+                    " asfd asdf asf asd fasdfasdfasdfasdgsfga fgasf gasfg asfg"),
           ],
         ),
       ),
@@ -66,6 +73,12 @@ class Post extends StatelessWidget {
 }
 
 class Cards extends StatelessWidget {
+  Cards({this.judul, this.penulis, this.tanggal, this.gambar, this.isi});
+  final String judul;
+  final String penulis;
+  final String tanggal;
+  final String gambar;
+  final String isi;
   @override
   Widget build(BuildContext context) {
     return new Container(
@@ -76,32 +89,42 @@ class Cards extends StatelessWidget {
           child: RaisedButton(
             shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(20.0)),
-            onPressed: () {},
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => Detail(
+                        judul: judul,
+                        penulis: penulis,
+                        tanggal: tanggal,
+                        gambar: gambar,
+                        isi: isi)),
+              );
+            },
             child: new Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: <Widget>[
-                new Image.asset("img/bromo.jpg"),
+                new Image.asset(gambar),
                 new Padding(padding: new EdgeInsets.all(5.0)),
-                new Text("Sample Tanggal",
+                new Text(tanggal,
                     style: new TextStyle(
                         fontSize: 12.0,
                         fontFamily: "Delicious",
                         color: Colors.grey)),
                 new Padding(padding: new EdgeInsets.all(5.0)),
-                new Text("Sample Judul",
+                new Text(judul,
                     style: new TextStyle(
                         fontSize: 20.0,
                         fontFamily: "Delicious",
                         color: Colors.black)),
                 new Padding(padding: new EdgeInsets.all(5.0)),
-                new Text("Sample Penulis",
+                new Text(penulis,
                     style: new TextStyle(
                         fontSize: 12.0,
                         fontFamily: "Delicious",
                         color: Colors.grey)),
                 new Padding(padding: new EdgeInsets.all(3.0)),
-                new Text(
-                    "Sample Post Sample Post Sample Post Sample Post Sample Post Sample Post Sample Post",
+                new Text(isi,
                     style: new TextStyle(
                         fontSize: 12.0,
                         fontFamily: "Delicious",
