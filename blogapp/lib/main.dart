@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import './post.dart' as post;
+import './kategori.dart' as kategori;
+import './search.dart' as search;
 
 void main() {
   runApp(new MaterialApp(
@@ -55,8 +57,8 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
         controller: controller,
         children: <Widget>[
           new post.Post(),
-          new post.Post(),
-          new post.Post(),
+          new kategori.Kategori(),
+          new search.Search(),
         ],
       ),
     );
