@@ -14,6 +14,21 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
   TabController controller;
+  Kategori selectedKategori;
+  List<Kategori> kategoris = [
+    Kategori("Komedi"),
+    Kategori("Non Fiksi"),
+  ];
+  List<DropdownMenuItem> generateItems(List<Kategori> kategoris) {
+    List<DropdownMenuItem> items = [];
+    for (var item in kategoris) {
+      items.add(DropdownMenuItem(
+        child: Text(item.name),
+        value: item,
+      ));
+    }
+    return items;
+  }
 
   @override
   void initState() {
@@ -42,6 +57,17 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
           child: new Column(
             children: <Widget>[
               new Search(),
+              new DropdownButton(
+                isExpanded: true,
+                style: TextStyle(color: Colors.blueGrey),
+                value: selectedKategori,
+                items: generateItems(kategoris),
+                onChanged: (item) {
+                  setState(() {
+                    selectedKategori = item;
+                  });
+                },
+              ),
               new Post(),
             ],
           ),
@@ -162,4 +188,9 @@ class _SearchState extends State<Search> {
       ),
     );
   }
+}
+
+class Kategori {
+  String name;
+  Kategori(this.name);
 }
